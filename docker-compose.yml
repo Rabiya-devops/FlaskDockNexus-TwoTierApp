@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+
+  web:
+    build: .
+    container_name: flaskdocknexus-app
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: mypassword
+      DB_NAME: flaskdb
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    container_name: flaskdocknexus-db
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_DATABASE: flaskdb
+    ports:
+      - "3306:3306"
